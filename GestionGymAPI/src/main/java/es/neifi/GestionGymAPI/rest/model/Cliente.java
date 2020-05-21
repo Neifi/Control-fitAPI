@@ -46,9 +46,7 @@ public class Cliente {
 	private String codigo_postal;
 	private String ciudad;
 	private String provincia;
-	private String telefono;
-	private String telefono_emergencia;
-	private String iban;
+
 	
 //	@ManyToOne(targetEntity = Gimnasio.class)
 //	@JoinColumn(name="id_gimnasio")

@@ -14,23 +14,24 @@ public class Config {
 		return new ModelMapper();
 	}
 	
-	public WebMvcConfigurer corsConfig() {
+//	BASIC AUTH CORS	
+//	public WebMvcConfigurer corsConfig() {
+//		
+//		return new WebMvcConfigurer() {
+//
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/**"); // TODO Cambiar en produccion
+//				/*
+//				 * registry.addMapping(/usuario)
+//				 * .allowedOrigins("http://localhost:4200)
+//				 * .allowedMethods("GET","POST","PUT","DELETE")
+//				 * .maxAge(3600);
+//				 */
+//				
+//			}
+//			
+//		};
 		
-		return new WebMvcConfigurer() {
-
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**"); // TODO Cambiar en produccion
-				/*
-				 * registry.addMapping(/usuario)
-				 * .allowedOrigins("http://localhost:4200)
-				 * .allowedMethods("GET","POST","PUT","DELETE")
-				 * .maxAge(3600);
-				 */
-				
-			}
-			
-		};
-		
-	}
+//	}
 }

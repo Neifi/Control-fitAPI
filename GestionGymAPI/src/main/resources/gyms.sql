@@ -26,23 +26,55 @@ CREATE TABLE cliente (
 	calle VARCHAR,
 	codigo_postal INT,
 	ciudad VARCHAR,
-	provincia VARCHAR,
-	telefono VARCHAR,
-	telefono_emergencia VARCHAR,
-	iban VARCHAR
+	provincia VARCHAR
 );
 
 CREATE TABLE usuario (
 	id_usuario INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	username VARCHAR NOT NULL,
 	password VARCHAR NOT NULL,
-	password2 VARCHAR,
 	avatar varchar,
 	fecha_creacion VARCHAR,
 	ultima_mod_password VARCHAR,
 	verificado BOOLEAN NOT NULL,
 	rol VARCHAR
 );
+
+CREATE TABLE metodoPago (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    id_cliente INT references cliente(id),
+    codigoConfirmacion INT,
+    numeroTarjeta INT,
+    IBAN VARCHAR,
+    fecha_caducidad DATE,
+    nombreTitular VARCHAR
+
+);
+CREATE TABLE factura(
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    iva INT NOT NULL,
+    importeUnitario INT NOT NULL
+
+);
+CREATE TABLE telefono(
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    id_cliente INT REFERENCES cliente(id_cliente),
+    numero varchar NOT NULL
+);
+CREATE TABLE  rutinaActiva(
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    nombre VARCHAR NOT NULL,
+    descripcion VARCHAR NOT NULL,
+    progreso INT NOT NULL
+
+);
+CREATE TABLE ejercicio(
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    id_rutina INT REFERENCES rutinaActiva(id),
+    nombre VARCHAR NOT NULL,
+    dificultad INT NOT NULL
+);
+
 CREATE TABLE registrohorario (
 	id_registrohorario INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	id_usuario INT REFERENCES usuario(id_usuario),
@@ -60,13 +92,46 @@ CREATE TABLE usuario_rol(
 	rol VARCHAR NOT NULL
 );
 
+CREATE TABLE verification_token(
+    id_token INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    token varchar,
+     expiryDate DATE
+
+);
  
 
 
+
+
+
+
+ALTER TABLE usuario
+        ADD FOREIGN KEY (id_usuario) REFERENCES cliente (id_cliente)
+                DEFERRABLE INITIALLY DEFERRED;
+ 
+ALTER TABLE cliente
+        ADD FOREIGN KEY (id_cliente) REFERENCES usuario (id_usuario)
+                DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE usuario
+        ADD FOREIGN KEY (id_usuario) REFERENCES verification_token (id_token)
+                DEFERRABLE INITIALLY DEFERRED;
+
+                
+                
+ALTER TABLE verification_token
+        ADD FOREIGN KEY (id_token) REFERENCES usuario (id_suario)
+                DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE verification_token
+        ADD FOREIGN KEY (id_token) REFERENCES usuario (id_suario)
+                DEFERRABLE INITIALLY DEFERRED;
+
+                
 insert into public.gimnasio (direccion, codigo_postal, pais, ciudad, nombre,provincia) values ( 'Passeig de pere III 92', 08241, 'España', 'Manresa','Manresa1','Barcelona');
-insert into public.cliente ( id_gimnasio, dni, nombre, apellidos, fecha_nacimiento, fecha_inscripcion, email, calle, codigo_postal, ciudad, provincia, telefono, telefono_emergencia, iban) values (1,'39123852Y','admin','admin','27/11/1996','02/05/2020','neifi@gmail.es','Calle cos 11 1-1',08241,'Manresa','Barcelona','(34)631285366','(34)631381231','ES4801282374565991935943');
-insert into public.cliente ( id_gimnasio, dni, nombre, apellidos, fecha_nacimiento, fecha_inscripcion, email, calle, codigo_postal, ciudad, provincia, telefono, telefono_emergencia, iban) values (1,'39783162V','user','user','01/02/1996','02/05/2020','juan@gmail.es','Calle mallorca 36 4-1',08241,'Manresa','Barcelona','(34)689373191','','ES9720385729718233613812');
-insert into public.cliente ( id_gimnasio, dni, nombre, apellidos, fecha_nacimiento, fecha_inscripcion, email, calle, codigo_postal, ciudad, provincia, telefono, telefono_emergencia, iban) values (1,'Y3051657P','unverified','unverified','11/04/1992','02/05/2020','maria@gmail.es','Carretera de vic 134 2-2 ',08241,'Manresa','Barcelona','(34)667257327','','ES0704879262838526548852');
+insert into public.cliente ( id_gimnasio, dni, nombre, apellidos, fecha_nacimiento, fecha_inscripcion, email, calle, codigo_postal, ciudad, provincia ) values (1,'39123852Y','admin','admin','27/11/1996','02/05/2020','neifi@gmail.es','Calle cos 11 1-1',08241,'Manresa','Barcelona');
+insert into public.cliente ( id_gimnasio, dni, nombre, apellidos, fecha_nacimiento, fecha_inscripcion, email, calle, codigo_postal, ciudad, provincia) values (1,'39783162V','user','user','01/02/1996','02/05/2020','juan@gmail.es','Calle mallorca 36 4-1',08241,'Manresa','Barcelona');
+insert into public.cliente ( id_gimnasio, dni, nombre, apellidos, fecha_nacimiento, fecha_inscripcion, email, calle, codigo_postal, ciudad, provincia) values (1,'Y3051657P','unverified','unverified','11/04/1992','02/05/2020','maria@gmail.es','Carretera de vic 134 2-2 ',08241,'Manresa','Barcelona');
 
 insert into public.usuario (username,password,fecha_creacion,ultima_mod_password,verificado) values ('admin','$2y$12$tBb8IOZhtQkleN0MNTE1y.pqoCl8EVkTtPEGuG/ZPNFFBYe3YsyoC','2020-05-02 15:44:20.852+02','2020-05-02 15:44:20.774+02',true);
 insert into public.usuario (username,password,fecha_creacion,ultima_mod_password,verificado) values ('user','$2y$12$7V1Mo0FujQvoIPS28r7P1e9yTSghzqKR7ej0iL0R0P5ll/xODVW0W','2020-05-02 15:44:20.852+02','2020-05-02 15:44:20.774+02',true);
@@ -82,16 +147,6 @@ insert into public.registrohorario(id_usuario,horaentrada,horasalida,dia,mes,ani
 insert into public.registrohorario(id_usuario,horaentrada,horasalida,dia,mes,anio) values (2,'10:00:00','12:00:00',08,05,2020);
 insert into public.registrohorario(id_usuario,horaentrada,horasalida,dia,mes,anio) values (3,'17:00:00','21:00:00',10,05,2020);
 
-
-
 insert into public.usuario_rol(usuario_id_usuario,rol) values (1,'ADMIN');
 insert into public.usuario_rol(usuario_id_usuario,rol) values (2,'USER');
 insert into public.usuario_rol(usuario_id_usuario,rol) values (2,'UNVERIFIED');
-
-ALTER TABLE usuario
-        ADD FOREIGN KEY (id_usuario) REFERENCES cliente (id_cliente)
-                DEFERRABLE INITIALLY DEFERRED;
- 
-ALTER TABLE cliente
-        ADD FOREIGN KEY (id_cliente) REFERENCES usuario (id_usuario)
-                DEFERRABLE INITIALLY DEFERRED;

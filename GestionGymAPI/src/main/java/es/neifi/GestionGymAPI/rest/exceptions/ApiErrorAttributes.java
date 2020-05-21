@@ -1,4 +1,4 @@
-package es.neifi.GestionGymAPI.res.exceptions;
+package es.neifi.GestionGymAPI.rest.exceptions;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,4 +1,4 @@
-package es.neifi.GestionGymAPI.res.exceptions;
+package es.neifi.GestionGymAPI.rest.exceptions;
 
 public class StorageException extends RuntimeException {
 

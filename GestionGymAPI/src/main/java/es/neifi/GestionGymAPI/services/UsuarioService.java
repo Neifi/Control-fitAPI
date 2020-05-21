@@ -29,7 +29,7 @@ public class UsuarioService extends BaseService<Usuario, Integer,UsuarioReposito
 	
 	public Usuario nuevoUsuario (CrearUsuarioDTO usuario) {
 		
-		if(usuario.getPassword().contentEquals(usuario.getPassword2())) {
+		 
 			Usuario newUsuario = Usuario.builder()
 					.username(usuario.getUsername())
 					.password(passwordEncoder.encode(usuario.getPassword()))
@@ -42,8 +42,6 @@ public class UsuarioService extends BaseService<Usuario, Integer,UsuarioReposito
 			} catch (DataIntegrityViolationException e) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Nombre de usuario existente");
 			}
-		}else {
-			throw new RuntimeException("Password no coincide");
-		}
+		
 	}
 }

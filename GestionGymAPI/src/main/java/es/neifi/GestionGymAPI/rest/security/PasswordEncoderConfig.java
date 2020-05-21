@@ -1,4 +1,4 @@
-package es.neifi.GestionGymAPI.rest.config;
+package es.neifi.GestionGymAPI.rest.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

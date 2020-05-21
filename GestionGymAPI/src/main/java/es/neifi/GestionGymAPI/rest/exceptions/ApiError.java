@@ -1,4 +1,4 @@
-package es.neifi.GestionGymAPI.res.exceptions;
+package es.neifi.GestionGymAPI.rest.exceptions;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @RequiredArgsConstructor
 @NoArgsConstructor
-@Deprecated
+
 public class ApiError {
 	
 	@NonNull

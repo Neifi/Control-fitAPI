@@ -16,7 +16,5 @@ public class CrearUsuarioDTO {
 	private String username;
 	private String avatar;
 	private String password;
-	private String password2;
-	//private Rol rol;
 	
 }

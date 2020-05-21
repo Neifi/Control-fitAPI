@@ -17,8 +17,8 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import es.neifi.GestionGymAPI.res.exceptions.StorageException;
-import es.neifi.GestionGymAPI.res.exceptions.StorageFileNotFoundException;
+import es.neifi.GestionGymAPI.rest.exceptions.StorageException;
+import es.neifi.GestionGymAPI.rest.exceptions.StorageFileNotFoundException;
 
 
 /**

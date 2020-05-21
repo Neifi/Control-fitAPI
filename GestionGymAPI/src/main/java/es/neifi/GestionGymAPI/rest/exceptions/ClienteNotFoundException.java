@@ -1,4 +1,4 @@
-package es.neifi.GestionGymAPI.res.exceptions;
+package es.neifi.GestionGymAPI.rest.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -51,7 +51,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -70,15 +70,12 @@
 			<version>2.3.5</version>
 		</dependency>
 
-		<!--Commons net -->
-		<!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
 			<version>3.6</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -86,16 +83,31 @@
 		</dependency>
 
 		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.10.8</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.10.8</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.10.8</version>
+		</dependency>
+
+
+
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
 
 		<dependency>
 			<groupId>io.springfox</groupId>

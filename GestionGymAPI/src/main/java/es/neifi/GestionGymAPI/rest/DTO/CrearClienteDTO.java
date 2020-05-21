@@ -16,5 +16,4 @@ public class CrearClienteDTO {
 	private String apellidos;
 	private String fecha_nacimiento;
 	private String fecha_inscripcion;
-	private boolean admin;
 }

@@ -20,10 +20,7 @@ public class InfoClienteDTO {
 	private String codigo_postal;
 	private String ciudad;
 	private String provincia;
-	private String telefono;
-	private String telefono_emergencia;
 	private String fecha_inscripcion;
-	private String iban;
 	
 	//private List<RegistroHorario> registrohorario;
 
