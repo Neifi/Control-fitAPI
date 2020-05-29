@@ -35,8 +35,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Component
 public class Cliente {
-
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
