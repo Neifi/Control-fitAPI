@@ -8,14 +8,14 @@ CREATE TABLE gimnasio (
 	nombre varchar(50),
 	ciudad VARCHAR(50),
 	direccion VARCHAR(50),
-	codigo_postal INT,
+	codigo_postal VARCHAR(5),
 	provincia VARCHAR(50),
 	pais VARCHAR(50)
 );
 
 /*TABLA CLIENTES*/
 CREATE TABLE cliente (
-	id_cliente INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	id_gimnasio INT REFERENCES gimnasio(id_gimnasio),
 	dni VARCHAR(9) UNIQUE,
 	nombre VARCHAR(50) NOT NULL,

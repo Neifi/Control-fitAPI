@@ -45,6 +45,7 @@ import es.neifi.GestionGymAPI.rest.model.cliente.Cliente;
 import es.neifi.GestionGymAPI.rest.model.cliente.ClienteRepository;
 import es.neifi.GestionGymAPI.rest.model.rol.Rol;
 import es.neifi.GestionGymAPI.rest.model.usuario.Usuario;
+import es.neifi.GestionGymAPI.rest.model.usuario.UsuarioRepository;
 import es.neifi.GestionGymAPI.rest.services.UsuarioService;
 import es.neifi.GestionGymAPI.rest.exceptions.ApiError;
 import es.neifi.GestionGymAPI.rest.exceptions.ClienteNotFoundException;
@@ -62,7 +63,7 @@ public class ClienteController {
 	private final ClientDetailsDTOConverter clienteDetailsDTOConverter;
 	private final CreateClienteDTOConverter createClienteDTOConverter;
 	private final EditarClienteDTOConverter editarClienteDTOConverter;
-
+	private final UsuarioRepository usuarioRepository;
 	/**
 	 * Obtener todos los clientes
 	 * 
@@ -123,11 +124,12 @@ public class ClienteController {
 			@ApiResponse(code = 404, message = "Not Found", response = ApiError.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = ApiError.class) })
 	@PostMapping("/cliente")
-	public ResponseEntity<CrearClienteDTO> crearCliente(
+	public ResponseEntity<?> crearCliente(
 			@ApiParam(value = "Datos del cliente", required = true, type = "JSON") @RequestBody CrearClienteDTO nuevo) {
 		Cliente saved = createClienteDTOConverter.convertToClient(nuevo);
 		clienteRepository.save(saved);
-		return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
+		buildUsuario(saved);
+		return ResponseEntity.status(HttpStatus.CREATED).body(saved );
 	}
 
 	@PutMapping("/cliente")
@@ -167,34 +169,14 @@ public class ClienteController {
 		clienteRepository.delete(borrar);
 		return ResponseEntity.noContent().build();
 	}
-
-
-
-
-
-
-	private String generarPassword(Cliente c) {
-		String apellido = c.getApellidos();
-		String nombre = c.getNombre();
-		String password = nombre.substring(0).toUpperCase().concat(apellido.toLowerCase()).concat(".123");
-		return password;
-
-	};
-
-	private String generarUsername(Cliente c) {
-		String username = c.getDni().substring(6, 9).toLowerCase();
-
-		return username;
-	}
-
+	
 	private Usuario buildUsuario(Cliente c) {
 
-		return Usuario.builder().verificado(false).cliente(c).avatar(null).username(generarUsername(c))
-				.password(generarPassword(c)).build();
+		 return usuarioRepository.save((Usuario.builder().verificado(false).cliente(c).avatar(null).username(c.getNombre())
+				.password(c.getNombre()).build()));
+					
 	}
 
-	public void altaUsuario() {
 
-	}
 
 }

@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 					.authorizeRequests()
-					.antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+					.antMatchers(HttpMethod.POST, "/**").permitAll()
 					.antMatchers(HttpMethod.GET, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
 					.antMatchers(HttpMethod.POST, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
 					.antMatchers(HttpMethod.PUT, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
@@ -72,5 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// filtro
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 	}
-
+	
+	
 }

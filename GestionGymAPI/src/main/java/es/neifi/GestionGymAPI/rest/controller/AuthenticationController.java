@@ -25,6 +25,11 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
+/**
+ * Gestiona la autenticación del usuario mediante jwt
+ * @author neifi
+ *
+ */
 public class AuthenticationController {
 	
 	private final AuthenticationManager authenticationManager;
@@ -32,6 +37,13 @@ public class AuthenticationController {
 	private final UsuarioDTOConverter converter;
 	
 	@PostMapping("auth/login")
+	/**
+	 * Apartir de una petición de login con el username y password, si las credenciales
+	 * son válidas se generará un token con el que el usuario podrá acceder a los recursos
+	 * pertinentes.
+	 * @param loginRequest username y password
+	 * @return un 201 CREATED con el usuario y el token generado.
+	 */
 	public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest){
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 		
@@ -42,9 +54,7 @@ public class AuthenticationController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(converter.convertUserAndTokenToJwtUserResponse(usuario,token ));
 	}
 	
-	public GetUserDTO me(@AuthenticationPrincipal Usuario usuario) {
-		return converter.convertUserToGetUserDTO(usuario);
-	}
+
 
 
 }

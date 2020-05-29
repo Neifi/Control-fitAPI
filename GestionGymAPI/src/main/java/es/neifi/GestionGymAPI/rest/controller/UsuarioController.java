@@ -77,24 +77,18 @@ public class UsuarioController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No ha sido posible subir la imagen");
 		}
 
-		
 	}
 
-	@PostMapping("/registro")
-	public ResponseEntity<GetUserDTO> nuevoUsuario(@RequestBody CrearUsuarioDTO nuevoUsuario) {
-		ResponseEntity<GetUserDTO> toReturn = ResponseEntity.status(HttpStatus.CREATED)
-				.body(usuarioDTOConverter.convertUserToGetUserDTO(usuarioService.nuevoUsuario(nuevoUsuario)));
-
-		// Token y mail
-		// String appUrl = servletContext.getContextPath();
-
-		return toReturn;
-	}
 
 	@PutMapping("/usuario")
 	public ResponseEntity<?> updatePerfil(@RequestBody PutUsuarioDTO data, @RequestParam int id) {
 		return ResponseEntity.status(HttpStatus.OK).body(usuarioService.putUsuario(data, id));
 	}
+	
+	public ResponseEntity<GetUserDTO> nuevoUsuario(CrearUsuarioDTO nuevoUsuario) {
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(usuarioDTOConverter.convertUserToGetUserDTO(usuarioService.nuevoUsuario(nuevoUsuario)));
+		
+	}
 
 }
-
