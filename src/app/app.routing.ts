@@ -6,8 +6,15 @@ import { Routes, RouterModule, CanActivate } from "@angular/router";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { LoginComponent } from "./components/login/login.component";
 import { AuthGuard } from "./components/login/services/auth.guard.service";
+import { AddClienteComponent } from "./dialogs/add-cliente/add-cliente.component";
 
 const routes: Routes = [
+  {
+    path: "add",
+    component: AddClienteComponent,
+    pathMatch: "full",
+    
+  },
   {
     path: "login",
     component: LoginComponent,

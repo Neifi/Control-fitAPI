@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import { MatDialog} from '@angular/material/dialog';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AddClienteComponent } from 'app/dialogs/add-cliente/add-cliente.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +14,12 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog:MatDialog,
+    private router:Router,
+    public bottomSheet:MatBottomSheet,
+    private snackBar: MatSnackBar) { }
+
+
   animacionLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -120,6 +131,15 @@ export class DashboardComponent implements OnInit {
       var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', aforoSemanal, opcionesAforoSemanal, responsive);
 
       this.animacionBarChart(websiteViewsChart);
+  }
+
+  public addClient(){
+    this.bottomSheet.open(AddClienteComponent,{
+    })
+  }
+
+  public betaAlert(){
+    this.snackBar.open("Esta funcion no esta disponible todavía","Cerrar")
   }
 
 }

@@ -10,14 +10,14 @@
             </p>
           </div>
           <div class="card-body">
-            <form [formGroup]="form" (ngSubmit)="updateUser(cliente)">
+            <form [formGroup]="form" (ngSubmit)="updateUser()">
               <div class="row">
                 <div class="col-md-4">
                   <mat-form-field class="example-full-width">
                     <input
                       matInput
                       placeholder="Nombre de usuario"
-                      [value]="cliente.nombre"
+                      
                       formControlName="nombre"
 
                     />

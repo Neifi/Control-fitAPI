@@ -32,4 +32,8 @@ export class ClienteService {
     
   }
 
+  public postCliente(cliente:Cliente){
+    return this.httpClient.post(this.URL,cliente);
+  }
+
 }

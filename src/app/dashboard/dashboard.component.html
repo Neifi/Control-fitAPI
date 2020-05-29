@@ -14,8 +14,7 @@
       <div class="col-md-6">
         <div class="card card-chart">
           <div class="card-header card-header-warning">
-            <div class="ct-chart" id="websiteViewsChart" ></div>
-            
+            <div class="ct-chart" id="websiteViewsChart"></div>
           </div>
           <div class="card-body">
             <h4 class="card-title">Aforo semanal</h4>
@@ -59,5 +58,46 @@
           </div>
         </div>
       </div>
+      <div class="col offset-3">
+        <button
+        (click)="addClient()"
+        style="height: 150px; width: 200px;"
+        mat-raised-button
+        type="submit"
+        class="btn btn-danger"
+      >
+        Añadir cliente
+      </button>
 
+      <button
+      (click)="betaAlert()"
+      style="height: 150px; width: 200px;"
+      mat-raised-button
+      type="submit"
+      class="btn btn-danger"
+    >
+      Gestionar rutinas
+    </button>
+    <button
+    (click)="betaAlert()"
+    style="height: 150px; width: 200px;"
+    mat-raised-button
+    type="submit"
+    class="btn btn-danger"
+  >
+    Campañas
+  </button>
+  <button
+  (click)="betaAlert()"
+  style="height: 150px; width: 200px;"
+  mat-raised-button
+  type="submit"
+  class="btn btn-danger"
+>
+  Clases
+</button>
+      </div>
+    </div>
+ 
+  </div>
 </div>

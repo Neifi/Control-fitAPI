@@ -9,6 +9,7 @@ import { decode } from "jwt-decode";
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"],
   providers: [LoginServiceService],
+  
 })
 export class LoginComponent implements OnInit {
   isUsed: boolean;
@@ -29,10 +30,8 @@ export class LoginComponent implements OnInit {
     console.log(this.isUsed);
   }
 
-  login(route: ActivatedRouteSnapshot) {
-    // const token = sessionStorage.getItem("token");
-    // this.role = decode(token).role;
-
+  login() {
+    
     this.loginService.authenticate(this.username, this.password).subscribe(
       (data) => {
         this.invalidLogin = false;
