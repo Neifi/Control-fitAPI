@@ -55,13 +55,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 					.authorizeRequests()
-					.antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+					/**.antMatchers(HttpMethod.POST, "/auth/login").permitAll()
 					.antMatchers(HttpMethod.GET, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
 					.antMatchers(HttpMethod.POST, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
 					.antMatchers(HttpMethod.PUT, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
 					.antMatchers(HttpMethod.DELETE, "/cliente/**", "/registro/**", "/horario/**").hasRole("ADMIN")
 					.antMatchers(HttpMethod.POST, "user/upload").hasAnyRole("ADMIN","USER")
-					.antMatchers(HttpMethod.GET, "/user/**").hasAnyRole("ADMIN","USER")
+					.antMatchers(HttpMethod.GET, "/user/**").hasAnyRole("ADMIN","USER")*/
+					.antMatchers(HttpMethod.GET, "/**").permitAll()
 					.anyRequest().authenticated();
 
 		// filtro

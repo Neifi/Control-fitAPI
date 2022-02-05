@@ -1,0 +1,10 @@
+
+services:
+  postgresql:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=controlfit
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
