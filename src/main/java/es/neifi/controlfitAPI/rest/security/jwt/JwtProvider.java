@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.crypto.spec.SecretKeySpec;
 
+import es.neifi.controlfitAPI.rest.exceptions.UserNotVerifiedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,6 @@ import io.jsonwebtoken.security.Keys;
 import lombok.extern.java.Log;
 
 @Log
-@Component
 public class JwtProvider {
 
 	public static final String TOKEN_HEADER = "Authorization";
@@ -43,6 +43,7 @@ public class JwtProvider {
 	
 	public String generateToken(Authentication authentication) {
 		Usuario usuario = (Usuario) authentication.getPrincipal();
+		if (usuario.isNotVerified()) throw  new UserNotVerifiedException(usuario.getId_usuario());
 		Date tokenExpirationDate = new Date(System.currentTimeMillis() + (jwtDurationTokenSecs * 1000));
 		
 		return Jwts.builder()

@@ -31,7 +31,7 @@ import lombok.extern.java.Log;
  */
 public class JwtAuthorizationFilter extends OncePerRequestFilter{
 	
-	private final JwtProvider provider;
+	private final JwtProvider provider = new JwtProvider();
 	private final CustomUserDetailsService userDetailsService;
 	
 	

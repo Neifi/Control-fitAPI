@@ -37,11 +37,8 @@ public class UsuarioDTOConverter {
 	}
 	
 	public Object convertUserAndTokenToJwtUserResponse(Usuario usuario, String token) {
-		// TODO Auto-generated method stub
 		return JwtUserResponse.jwtUserResponseBuilder()
 				.username(usuario.getUsername())
-				.password(usuario.getPassword())
-				.avatar(usuario.getAvatar())
 				.roles(usuario.getRol().stream().map(Rol::name).collect(Collectors.toSet()))
 				.token(token)
 				.build();

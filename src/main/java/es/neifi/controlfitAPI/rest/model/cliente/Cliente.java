@@ -53,10 +53,6 @@ public class Cliente {
 	private String ciudad;
 	private String provincia;
 
-//	@ManyToOne(targetEntity = Gimnasio.class)
-//	@JoinColumn(name="id_gimnasio")
-//	private Gimnasio id_gimnasio;//TODo Trigger
-
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id", referencedColumnName = "id_usuario")
