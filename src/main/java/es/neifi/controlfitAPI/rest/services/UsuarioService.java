@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import es.neifi.controlfitAPI.rest.exceptions.UsuarioNotFoundException;
-import es.neifi.controlfitAPI.rest.model.cliente.Cliente;
-import es.neifi.controlfitAPI.rest.model.cliente.ClienteRepository;
-import es.neifi.controlfitAPI.rest.model.dto.CrearClienteDTO;
+import es.neifi.controlfitAPI.rest.model.cliente.ClienteJPARepository;
 import es.neifi.controlfitAPI.rest.model.dto.CrearUsuarioDTO;
-import es.neifi.controlfitAPI.rest.model.dto.PutClienteDTO;
 import es.neifi.controlfitAPI.rest.model.dto.converter.UsuarioDTOConverter;
 import es.neifi.controlfitAPI.rest.model.dto.usuario.PutUsuarioDTO;
 import es.neifi.controlfitAPI.rest.model.rol.Rol;
@@ -28,10 +25,10 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class UsuarioService extends BaseService<Usuario, Integer,UsuarioRepository>{
+public class UsuarioService extends BaseService<Usuario, String,UsuarioRepository>{
 	
 	private final PasswordEncoder passwordEncoder;
-	private final ClienteRepository clienteRepository;
+	private final ClienteJPARepository clienteJPARepository;
 	private UsuarioDTOConverter usuarioDTOConverter;
 	public Optional<Usuario> findByUsername(String username){
 		return this.repositorio.findByUsername(username);
@@ -66,7 +63,7 @@ public class UsuarioService extends BaseService<Usuario, Integer,UsuarioReposito
 	 * @param id
 	 * @return
 	 */
-	public Usuario putUsuario(@RequestParam PutUsuarioDTO usuarioDTO, @RequestParam int id) {
+	public Usuario putUsuario(@RequestParam PutUsuarioDTO usuarioDTO, @RequestParam String id) {
 		return findById(id).map(u ->{
 			u = usuarioDTOConverter.convertToUsuario(usuarioDTO);
 			return save(u);

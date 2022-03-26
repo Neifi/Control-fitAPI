@@ -1,6 +1,6 @@
 # GestionGym API
 
-API para la gestion de clientes y usuarios de un gimnasio
+API para la gestion de clientes y usuarios de un gym
  ## Tecnologías
 * Sprig web 
 * Spring security

@@ -2,6 +2,9 @@ package es.neifi.controlfitAPI.rest.controller;
 
 import javax.validation.Valid;
 
+import es.neifi.controlfitAPI.rest.controller.tmpUsecases.LoginUseCase;
+import es.neifi.controlfitAPI.rest.controller.tmpUsecases.LoginUseCaseRequest;
+import es.neifi.controlfitAPI.rest.controller.tmpUsecases.LoginUsecaseResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

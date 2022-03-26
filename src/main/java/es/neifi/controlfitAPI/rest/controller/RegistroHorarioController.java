@@ -1,20 +1,12 @@
 package es.neifi.controlfitAPI.rest.controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.chrono.ChronoLocalDate;
-import java.time.chrono.Chronology;
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.stream.Collectors;
 
+import es.neifi.controlfitAPI.rest.model.cliente.ClientId;
 import org.joda.time.DateTime;
-import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.Minutes;
 import org.joda.time.Seconds;
@@ -22,8 +14,6 @@ import org.joda.time.Seconds;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,14 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
-import es.neifi.controlfitAPI.rest.exceptions.ApiError;
 import es.neifi.controlfitAPI.rest.exceptions.ClienteNotFoundException;
-import es.neifi.controlfitAPI.rest.model.cliente.Cliente;
-import es.neifi.controlfitAPI.rest.model.cliente.ClienteRepository;
-import es.neifi.controlfitAPI.rest.model.dto.CrearClienteDTO;
-import es.neifi.controlfitAPI.rest.model.dto.InfoClienteDTO;
+import es.neifi.controlfitAPI.rest.model.cliente.ClienteJPARepository;
 import es.neifi.controlfitAPI.rest.model.dto.converter.ClientDetailsDTOConverter;
 import es.neifi.controlfitAPI.rest.model.registrohorario.RegistroHorario;
 import es.neifi.controlfitAPI.rest.model.registrohorario.RegistroHorarioRepository;
@@ -54,7 +39,7 @@ import lombok.RequiredArgsConstructor;
 public class RegistroHorarioController {
 
 	private final RegistroHorarioRepository registroHorarioRepo;
-	private final ClienteRepository clienteRepository;
+	private final ClienteJPARepository clienteJPARepository;
 	private final ClientDetailsDTOConverter clienteDetailsDTOConverter;
 	private String dtEntrada = "";
 
@@ -72,9 +57,9 @@ public class RegistroHorarioController {
 	
 	
 	@GetMapping("/horario/{id}")
-	public ResponseEntity<?> obtenerPorIdUsuario(@PathVariable int id) {
+	public ResponseEntity<?> obtenerPorIdUsuario(@PathVariable String id) {
 		return ResponseEntity.ok(registroHorarioRepo.selectByUserId(id)
-				.orElseThrow(() -> new ClienteNotFoundException(id)));
+				.orElseThrow(() -> new ClienteNotFoundException(new ClientId(id))));
 		
 	}
 	
@@ -89,13 +74,7 @@ public class RegistroHorarioController {
 		}
 	}
 
-	/**
-	 * 
-	 * @param nuevo        Entidad registroHorario
-	 * @param clientId     id del cliente al cual pertenece el registro
-	 * @param tipoRegistro tipo de registro, entrada o salida
-	 * @return
-	 */
+
 //	LocalTime time = LocalTime.now();
 
 	@JsonFormat(shape = Shape.NUMBER_INT, pattern = "dd-MM-yyyy hh:mm:ss")

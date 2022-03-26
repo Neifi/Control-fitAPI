@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 
-public interface RegistroHorarioRepository extends JpaRepository<RegistroHorario, Integer>{
+public interface RegistroHorarioRepository extends JpaRepository<RegistroHorario, String>{
 	
 	@Transactional
 	@Modifying
@@ -28,11 +28,11 @@ public interface RegistroHorarioRepository extends JpaRepository<RegistroHorario
 	public List<RegistroHorario> selectIntervaloFecha(String fechaInicio, String fechaFin, int id_usuario);
 	
 	@Query(value = "SELECT * FROM registroHorario WHERE id_usuario = ?", nativeQuery = true)
-	public  Optional<List<RegistroHorario>> selectByUserId(int id);
+	public  Optional<List<RegistroHorario>> selectByUserId(String id);
 	
 	@Transactional
 	@Modifying
 	@Query(value="DELETE FROM registrohorario WHERE id_usuario = ?", nativeQuery = true)
-	public int deleteByIdUsuario(int id_usuario);
+	public int deleteByIdUsuario(String id_usuario);
 	
 }

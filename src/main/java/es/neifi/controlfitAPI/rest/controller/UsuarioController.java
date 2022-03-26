@@ -96,7 +96,7 @@ public class UsuarioController {
 	}
 
 	@PutMapping("/usuario")
-	public ResponseEntity<?> updatePerfil(@RequestBody PutUsuarioDTO data, @RequestParam int id) {
+	public ResponseEntity<?> updatePerfil(@RequestBody PutUsuarioDTO data, @RequestParam String id) {
 		return ResponseEntity.status(HttpStatus.OK).body(usuarioService.putUsuario(data, id));
 	}
 

@@ -21,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 	}
 
-	public Usuario loadUserById(int userId) {
+	public Usuario loadUserById(String userId) {
 		// TODO Auto-generated method stub
 		return usuarioService.findById(userId)
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));

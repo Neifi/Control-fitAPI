@@ -1,4 +1,4 @@
-package es.neifi.controlfitAPI.rest.controller
+package es.neifi.controlfitAPI.rest.controller.tmpUsecases
 
 import es.neifi.controlfitAPI.rest.model.rol.Rol
 import es.neifi.controlfitAPI.rest.model.usuario.Usuario

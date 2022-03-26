@@ -1,4 +1,4 @@
-CREATE TABLE gimnasio (
+CREATE TABLE gym (
 	id_gimnasio INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	nombre varchar(50),
 	ciudad VARCHAR(50),
@@ -11,7 +11,7 @@ CREATE TABLE gimnasio (
 /*TABLA CLIENTES*/
 CREATE TABLE cliente (
 	id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-	id_gimnasio INT REFERENCES gimnasio(id_gimnasio),
+	id_gimnasio INT REFERENCES gym(id_gimnasio),
 	dni VARCHAR(9) UNIQUE,
 	nombre VARCHAR(50) NOT NULL,
 	apellidos VARCHAR(50) NOT NULL,

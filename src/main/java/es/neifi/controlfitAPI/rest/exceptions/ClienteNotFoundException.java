@@ -1,17 +1,15 @@
 package es.neifi.controlfitAPI.rest.exceptions;
 
+import es.neifi.controlfitAPI.rest.model.cliente.ClientId;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class ClienteNotFoundException extends RuntimeException{
+public class ClienteNotFoundException extends RuntimeException {
 
-	private static final long serialVersionUID = -4672199995633832565L;
-	
-	public ClienteNotFoundException(int id) {
-		super("No se ha encontrado al cliente con la id "+id);
-	}
-	public ClienteNotFoundException() {
-		super("No se ha encontrado al cliente");
-	}
+  private static final long serialVersionUID = -4672199995633832565L;
+
+  public ClienteNotFoundException(ClientId id) {
+    super("No se ha encontrado al cliente con la id " + id.getId());
+  }
 }

@@ -2,7 +2,6 @@ package es.neifi.controlfitAPI.rest.model.usuario;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,29 +17,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import es.neifi.controlfitAPI.rest.model.cliente.ClienteEntity;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import es.neifi.controlfitAPI.rest.model.cliente.Cliente;
-import es.neifi.controlfitAPI.rest.model.registrohorario.RegistroHorario;
 import es.neifi.controlfitAPI.rest.model.rol.Rol;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @AllArgsConstructor
@@ -54,8 +46,7 @@ public class Usuario implements UserDetails {
   static final long serialVersionUID = 7615817677864376347L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id_usuario;
+  private String id_usuario;
 
   private String username;
   private String password;
@@ -126,7 +117,7 @@ public class Usuario implements UserDetails {
   }
 
 
-  public Usuario setId_usuario(int id_usuario) {
+  public Usuario setId_usuario(String id_usuario) {
     this.id_usuario = id_usuario;
     return this;
   }

@@ -1,9 +1,12 @@
 package es.neifi.controlfitAPI.rest.controller
 
+import es.neifi.controlfitAPI.rest.controller.tmpUsecases.LoginUseCase
+import es.neifi.controlfitAPI.rest.controller.tmpUsecases.LoginUseCaseRequest
 import es.neifi.controlfitAPI.rest.exceptions.UserNotVerifiedException
 import es.neifi.controlfitAPI.rest.model.cliente.Cliente
 import es.neifi.controlfitAPI.rest.model.rol.Rol
 import es.neifi.controlfitAPI.rest.model.usuario.Usuario
+import es.neifi.utils.ClientGenerator
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
@@ -34,20 +37,7 @@ class LoginUseCaseShould {
         registeredUser.setVerificado(true)
         registeredUser.setRol(roles)
         registeredUser.setCliente(
-            Cliente.builder()
-                .id(1)
-                .id_gimnasio(1)
-                .dni("39468192Y")
-                .nombre("nombre")
-                .apellidos("apelli dos")
-                .fecha_inscripcion("01/02/1996")
-                .fecha_inscripcion("01/02/2022")
-                .email("email@email.com")
-                .calle("calle")
-                .codigo_postal("02380")
-                .ciudad("Madrid")
-                .provincia("Madrid")
-                .build()
+            ClientGenerator.generateClient()
         )
         var usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(registeredUser, null)
         every {
@@ -77,20 +67,7 @@ class LoginUseCaseShould {
         registeredUser.setVerificado(false)
         registeredUser.setRol(roles)
         registeredUser.setCliente(
-            Cliente.builder()
-                .id(1)
-                .id_gimnasio(1)
-                .dni("39468192Y")
-                .nombre("nombre")
-                .apellidos("apelli dos")
-                .fecha_inscripcion("01/02/1996")
-                .fecha_inscripcion("01/02/2022")
-                .email("email@email.com")
-                .calle("calle")
-                .codigo_postal("02380")
-                .ciudad("Madrid")
-                .provincia("Madrid")
-                .build()
+            ClientGenerator.generateClient()
         )
         var usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(registeredUser, null)
         every {
