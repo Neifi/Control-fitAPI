@@ -1,0 +1,96 @@
+package es.neifi.controlfitAPI.rest.infrastructure.controller;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.servlet.ServletContext;
+
+import es.neifi.controlfitAPI.rest.infrastructure.controller.files.FicherosController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+
+import es.neifi.controlfitAPI.rest.model.dto.CrearUsuarioDTO;
+import es.neifi.controlfitAPI.rest.model.dto.converter.UsuarioDTOConverter;
+import es.neifi.controlfitAPI.rest.model.dto.usuario.GetUserDTO;
+import es.neifi.controlfitAPI.rest.model.dto.usuario.PutUsuarioDTO;
+import es.neifi.controlfitAPI.rest.model.usuario.Usuario;
+import es.neifi.controlfitAPI.rest.services.StorageService;
+import es.neifi.controlfitAPI.rest.services.UsuarioService;
+import lombok.RequiredArgsConstructor;
+
+
+@RequiredArgsConstructor
+public class UsuarioController {
+
+  private final UsuarioService usuarioService;
+  private final UsuarioDTOConverter usuarioDTOConverter;
+  // private final SetAvatarUsuarioDTO setAvatarUsuarioDTO;
+  private final ServletContext servletContext;
+  private final StorageService storageService;
+
+  @GetMapping("/me")
+  public Optional<Usuario> me(@AuthenticationPrincipal Usuario usuarioActual) {
+
+    // return usuarioDTOConverter.convertUserToGetUserDTO(usuarioActual);
+    return usuarioService.findById(usuarioActual.getId_usuario());
+  }
+
+
+  @GetMapping("/usuario")
+  public List getAllUsers() {
+
+    // return usuarioDTOConverter.convertUserToGetUserDTO(usuarioActual);
+    return (List) usuarioService.findAll().stream().collect(Collectors.toList());
+  }
+
+  @PutMapping(value = "usuario/avatar", consumes = MediaType.ALL_VALUE)
+  public ResponseEntity<?> nuevoAvatar(
+          @AuthenticationPrincipal Usuario usuarioActual,
+          @RequestPart("file") MultipartFile file
+  ) {
+
+    String url = null;
+
+    if (!file.isEmpty()) {
+      String imagen = storageService.store(file);
+      url = MvcUriComponentsBuilder.fromMethodName(FicherosController.class, "serveFile", imagen, null).build()
+              .toUriString();
+      usuarioActual.setAvatar(url);
+      try {
+        return ResponseEntity.ok(usuarioService.edit(usuarioActual));
+      } catch (Exception e) {
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No ha sido posible cargar la imagen");
+      }
+    } else {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No ha sido posible subir la imagen");
+    }
+
+  }
+
+  @PostMapping("usuario")
+  public ResponseEntity<GetUserDTO> nuevoUsuario(@RequestBody CrearUsuarioDTO nuevoUsuario) {
+    ResponseEntity<GetUserDTO> toReturn = ResponseEntity.status(HttpStatus.CREATED)
+            .body(usuarioDTOConverter.convertUserToGetUserDTO(usuarioService.nuevoUsuario(nuevoUsuario)));
+
+    return toReturn;
+  }
+
+  @PutMapping("/usuario")
+  public ResponseEntity<?> updatePerfil(@RequestBody PutUsuarioDTO data, @RequestParam String id) {
+    return ResponseEntity.status(HttpStatus.OK).body(usuarioService.putUsuario(data, id));
+  }
+
+}

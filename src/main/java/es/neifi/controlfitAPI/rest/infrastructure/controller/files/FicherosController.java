@@ -1,4 +1,4 @@
-package es.neifi.controlfitAPI.rest.controller;
+package es.neifi.controlfitAPI.rest.infrastructure.controller.files;
 
 import java.io.IOException;
 
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.neifi.controlfitAPI.rest.services.StorageService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 

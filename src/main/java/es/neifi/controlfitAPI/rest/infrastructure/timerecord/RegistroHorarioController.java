@@ -1,4 +1,4 @@
-package es.neifi.controlfitAPI.rest.controller;
+package es.neifi.controlfitAPI.rest.infrastructure.timerecord;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -4,7 +4,9 @@ import es.neifi.controlfitAPI.rest.controller.FindClientByIdUsecase;
 import es.neifi.controlfitAPI.rest.controller.ListClientsUsecase;
 import es.neifi.controlfitAPI.rest.controller.tmpUsecases.CreateClientUsecase;
 import es.neifi.controlfitAPI.rest.controller.tmpUsecases.LoginUseCase;
+import es.neifi.controlfitAPI.rest.controller.tmpUsecases.UpdateClienteUseCase;
 import es.neifi.controlfitAPI.rest.model.IdGenerator;
+import es.neifi.controlfitAPI.rest.model.cliente.ClientRepository;
 import es.neifi.controlfitAPI.rest.model.cliente.ClienteJPARepository;
 import es.neifi.controlfitAPI.rest.model.gimnasio.GimnasioRepository;
 import es.neifi.controlfitAPI.rest.services.UUIDGenerator;
@@ -57,6 +59,13 @@ public class ApplicationConfig {
   public FindClientByIdUsecase findClientByIdUsecase(
           ClienteJPARepository clienteJPARepository) {
     return new FindClientByIdUsecase(clienteJPARepository);
+  }
+
+  @Bean
+  public UpdateClienteUseCase updateClienteUseCase(
+          ClientRepository clientRepository
+  ) {
+    return new UpdateClienteUseCase(clientRepository);
   }
 //	BASIC AUTH CORS	
 //	public WebMvcConfigurer corsConfig() {

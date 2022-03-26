@@ -1,5 +1,9 @@
-package es.neifi.controlfitAPI.rest.controller
+package es.neifi.controlfitAPI.rest.infrastructure.controller.cliente
 
+import es.neifi.controlfitAPI.rest.controller.FindClientByIdRequest
+import es.neifi.controlfitAPI.rest.controller.FindClientByIdUsecase
+import es.neifi.controlfitAPI.rest.controller.ListClientRequest
+import es.neifi.controlfitAPI.rest.controller.ListClientsUsecase
 import es.neifi.controlfitAPI.rest.exceptions.ApiError
 import es.neifi.controlfitAPI.rest.model.cliente.Cliente
 import io.swagger.annotations.ApiOperation

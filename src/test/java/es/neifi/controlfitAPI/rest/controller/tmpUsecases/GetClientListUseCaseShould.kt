@@ -1,5 +1,9 @@
-package es.neifi.controlfitAPI.rest.controller
+package es.neifi.controlfitAPI.rest.controller.tmpUsecases
 
+import es.neifi.controlfitAPI.rest.controller.ClienteResponse
+import es.neifi.controlfitAPI.rest.controller.ListClientRequest
+import es.neifi.controlfitAPI.rest.controller.ListClienteResponse
+import es.neifi.controlfitAPI.rest.controller.ListClientsUsecase
 import es.neifi.controlfitAPI.rest.model.cliente.Cliente
 import es.neifi.controlfitAPI.rest.model.cliente.ClienteJPARepository
 import es.neifi.utils.ClientGenerator
@@ -31,7 +35,7 @@ class GetClientListUseCaseShould {
       dni = cliente1.dni(),
       nombre = "nombre",
       apellidos = "apellido",
-      fechaNacimiento = "01/02/1996",
+      fechaNacimiento = cliente1.fechaNacimiento(),
       email = "email@mail.com",
       calle = "calle",
       codigoPostal = "02380",
@@ -42,7 +46,7 @@ class GetClientListUseCaseShould {
       dni = cliente2.dni(),
       nombre = "nombre",
       apellidos = "apellido",
-      fechaNacimiento = "01/02/1996",
+      fechaNacimiento = cliente2.fechaNacimiento(),
       email = "email@mail.com",
       calle = "calle",
       codigoPostal = "02380",

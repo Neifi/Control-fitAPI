@@ -1,11 +1,9 @@
-package es.neifi.controlfitAPI.rest.controller;
+package es.neifi.controlfitAPI.rest.infrastructure.controller.cliente;
 
 import es.neifi.controlfitAPI.rest.exceptions.ApiError;
-import es.neifi.controlfitAPI.rest.exceptions.ClienteNotFoundException;
-import es.neifi.controlfitAPI.rest.exceptions.FalloEnAltaClienteException;
+import es.neifi.controlfitAPI.rest.infrastructure.controller.UsuarioController;
 import es.neifi.controlfitAPI.rest.model.cliente.Cliente;
 import es.neifi.controlfitAPI.rest.model.cliente.ClienteJPARepository;
-import es.neifi.controlfitAPI.rest.model.dto.CrearUsuarioDTO;
 import es.neifi.controlfitAPI.rest.model.gimnasio.GimnasioRepository;
 import es.neifi.controlfitAPI.rest.model.registrohorario.RegistroHorarioRepository;
 import es.neifi.controlfitAPI.rest.model.usuario.Usuario;
@@ -15,19 +13,14 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.text.SimpleDateFormat;
 
 @RestController
 @RequestMapping({"/api"})

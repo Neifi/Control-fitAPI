@@ -1,4 +1,4 @@
-package es.neifi.controlfitAPI.rest.controller
+package es.neifi.controlfitAPI.rest.infrastructure.controller
 
 import es.neifi.controlfitAPI.rest.controller.tmpUsecases.CreateClientRequest
 import es.neifi.controlfitAPI.rest.controller.tmpUsecases.CreateClientUsecase

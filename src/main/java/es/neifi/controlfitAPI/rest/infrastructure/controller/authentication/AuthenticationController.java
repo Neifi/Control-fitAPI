@@ -1,4 +1,4 @@
-package es.neifi.controlfitAPI.rest.controller;
+package es.neifi.controlfitAPI.rest.infrastructure.controller.authentication;
 
 import javax.validation.Valid;
 
